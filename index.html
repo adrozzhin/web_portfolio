@@ -14,7 +14,6 @@
 
 <body>
     <header>
-        <a href="/">Andrei D</a>
         <nav>
 
             <a target="_blank" href="https://github.com/adrozzhin"><i class="fa-brands fa-github"></i></a>
@@ -55,7 +54,8 @@
             </div>
             <div style="display: none;" class="color-div">
                 <h4>Pick a color</h4>
-                <p style="display: none;">Great... now it's ruined!</p>
+                <p class="game-tip">Tip: Choose a color. Click Reset to try again.</p>
+                <p class="ruined-text" style="display: none;">Great... now it's ruined!</p>
                 <input type="color" id="color-picker" onchange="changeColor()" value="#0084ff">
                 <button style="display: none;" onclick="resetColor()">Reset</button>
             </div>
@@ -182,9 +182,66 @@
         const body = document.querySelector('body');
         const colorInput = document.getElementById('color-picker');
         const colorDiv = document.querySelector('.color-div');
-        const hiddenText = colorDiv.querySelector('.color-div p');
+        const hiddenText = colorDiv.querySelector('.ruined-text');
         const resetButton = colorDiv.querySelector('.color-div button');
         const playGameButton = document.getElementById('play-game');
+
+        function hexToRgb(hex) {
+            if (typeof hex !== 'string') return null;
+            const normalized = hex.trim();
+            const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(normalized);
+            if (!match) return null;
+            return {
+                r: parseInt(match[1], 16),
+                g: parseInt(match[2], 16),
+                b: parseInt(match[3], 16)
+            };
+        }
+
+        function relativeLuminance({ r, g, b }) {
+            // WCAG relative luminance (sRGB)
+            const srgb = [r, g, b].map(v => v / 255);
+            const linear = srgb.map(c => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+            return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+        }
+
+        function contrastRatio(lumA, lumB) {
+            const lighter = Math.max(lumA, lumB);
+            const darker = Math.min(lumA, lumB);
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        function applyLinkContrast(backgroundHex) {
+            const rgb = hexToRgb(backgroundHex);
+            if (!rgb) return;
+
+            const bgLum = relativeLuminance(rgb);
+            const whiteLum = 1;
+            const blackLum = 0;
+
+            const whiteContrast = contrastRatio(bgLum, whiteLum);
+            const blackContrast = contrastRatio(bgLum, blackLum);
+
+            const linkColor = whiteContrast >= blackContrast ? '#ffffff' : '#111111';
+            document.documentElement.style.setProperty('--color-link', linkColor);
+        }
+
+        function applyRuinedTextContrast(backgroundHex) {
+            const rgb = hexToRgb(backgroundHex);
+            if (!rgb) return;
+
+            const lum = relativeLuminance(rgb);
+            const isDarkBackground = lum < 0.18;
+
+            // Make the phrase readable regardless of page background.
+            if (isDarkBackground) {
+                hiddenText.style.color = '#111';
+                hiddenText.style.backgroundColor = 'rgba(255, 255, 255, 0.92)';
+            } else {
+                hiddenText.style.color = '#fff';
+                hiddenText.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+            }
+        }
 
         // 2. create the functions 
         function playGame() {
@@ -197,6 +254,8 @@
             // this function changes the background color of the page to the selected color
             const selectedColor = colorInput.value;
             body.style.backgroundColor = selectedColor;
+            applyRuinedTextContrast(selectedColor);
+            applyLinkContrast(selectedColor);
             hiddenText.style.display = 'block'; // show the hidden text
             resetButton.style.display = 'block'; // show the reset button
             colorInput.style.display = 'none'; // hide the color input
@@ -206,6 +265,9 @@
             // this function resets the background color to default and hides unnecessary elements
             body.style.backgroundColor = 'white'; // reset to default
             hiddenText.style.display = 'none'; // hide the hidden text
+            hiddenText.style.color = '';
+            hiddenText.style.backgroundColor = '';
+            document.documentElement.style.setProperty('--color-link', '#2563eb');
             resetButton.style.display = 'none'; // hide the reset button
             colorDiv.style.display = 'none'; // hide the color picker div
             colorInput.style.display = 'block'; // show the color input
