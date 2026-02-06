@@ -67,6 +67,18 @@ section {
     gap: 0.5rem;
 }
 
+.game-tip {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.ruined-text {
+    display: inline-block;
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-small);
+}
+
 .cads-grid {
     display: flex;
     flex-direction: column;
