@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrei Drozzhin Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="fanta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <a href="/">Andrei D</a>
+        <nav>
+
+            <a target="_blank" href="https://github.com/adrozzhin"><i class="fa-brands fa-github"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/andrei-drozzhin/"><i
+                    class="fa-brands fa-linkedin"></i></a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="intro-header">
+                <h1>Welcome to My Portfolio! I'm Andrei</h1>
+                <p>Software Developer</p>
+            </div>
+            <h5 class="intro-description">Full-stack (front-end focused) engineer building React/Next.js and
+                Angular/TypeScript apps with Node.js and .NET/C# REST APIs, shipping reliable features with CI/CD, cloud
+                delivery, and AI-assisted development.
+            </h5>
+            <div class="links-container">
+                <i class="fa-solid link-arrow fa-arrow-right"></i>
+                <a href="mailto:andrei.drozzhin@gmail.com">
+                    Email me
+                </a>
+                <a target="_blank" href="https://www.linkedin.com/in/andrei-drozzhin/">
+                    LinkedIn
+                </a>
+            </div>
+            <div id="play-game">
+                <button onclick="playGame()">Play a Game???</button>
+            </div>
+            <div style="display: none;" class="color-div">
+                <h4>Pick a color</h4>
+                <p style="display: none;">Great... now it's ruined!</p>
+                <input type="color" id="color-picker" onchange="changeColor()" value="#0084ff">
+                <button style="display: none;" onclick="resetColor()">Reset</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skills</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Technologies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>Angular | TypeScript | JavaScript | RxJS | Reactive Forms | Angular Routing | HTML | CSS |
+                            ReactJS | NextJS | React Native</td>
+                    </tr>
+                    <tr>
+                        <td>Backend</td>
+                        <td>.NET | C# | REST APIs | Node.js</td>
+                    </tr>
+                    <tr>
+                        <td>Data</td>
+                        <td>SQL | Databricks</td>
+                    </tr>
+                    <tr>
+                        <td>DevOps/Cloud</td>
+                        <td>CI/CD | GitHub Actions | Azure DevOps | Azure App Service | AWS | Git | GitHub</td>
+                    </tr>
+                    <tr>
+                        <td>Testing</td>
+                        <td>Cypress | Postman | Newman | JUnit</td>
+                    </tr>
+                    <tr>
+                        <td>Observability</td>
+                        <td>Elasticsearch | Kibana</td>
+                    </tr>
+                    <tr>
+                        <td>Tools</td>
+                        <td>IntelliJ | Visual Studio Code | Maven | JIRA</td>
+                    </tr>
+                    <tr>
+                        <td>AI</td>
+                        <td>GitHub Copilot | ChatGPT | Claude | Gemini</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Latest Projects</h2>
+            <div class="cards-grid">
+                <div class="project-card">
+                    <div>
+                        <p>Feb 3, 2026</p>
+                        <h4>Liftlog</h4>
+                        <div class="tech-list">
+                            <div class="card-button-secondary">
+                                <p>ReactJS</p>
+                            </div>
+                            <div class="card-button-secondary">
+                                <p>HTML | CSS</p>
+                            </div>
+                            <div class="card-button-secondary">
+                                <p>JavaScript</p>
+                            </div>
+                        </div>
+                        <p>A Simple 30 Workouts Training Plan
+                        </p>
+                        <div class="project-links">
+                            <a target="_blank" href="https://liftlog-workout.netlify.app/">Live</a>
+                            <a target="_blank" href="https://github.com/adrozzhin/liftlog">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <img class="big-img" src="/web_portfolio/public/Liftlog.png" alt="adrozzhin-thumbnail" />
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <p>Feb 6, 2026</p>
+                        <h4>Pixelbazaar</h4>
+                        <div class="tech-list">
+                            <div class="card-button-secondary">
+                                <p>NextJS</p>
+                            </div>
+                            <div class="card-button-secondary">
+                                <p>Full stack</p>
+                            </div>
+                            <div class="card-button-secondary">
+                                <p>Stripe</p>
+                            </div>
+                        </div>
+                        <p>Demo storefront UI built with Next.js.
+                        </p>
+                        <div class="project-links">
+                            <a target="_blank" href="https://main.d1l4dlm1io3pox.amplifyapp.com/">Live</a>
+                            <a target="_blank" href="https://github.com/adrozzhin/pixelbazaar">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <img class="big-img" src="/web_portfolio/public/Pixelbazaar.png" alt="adrozzhin-thumbnail" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>By <a href="https://www.linkedin.com/in/andrei-drozzhin/" target="_blank">Andrei Drozzhin</a></p>
+    </footer>
+    <script>
+        // JS code for the game and color picker functionality
+
+        // 1. select all the html elements so that we can later manipulate them
+
+        const body = document.querySelector('body');
+        const colorInput = document.getElementById('color-picker');
+        const colorDiv = document.querySelector('.color-div');
+        const hiddenText = colorDiv.querySelector('.color-div p');
+        const resetButton = colorDiv.querySelector('.color-div button');
+        const playGameButton = document.getElementById('play-game');
+
+        // 2. create the functions 
+        function playGame() {
+            // this function enables the play of the game by showing the color selector input
+            playGameButton.style.display = 'none'; // hide the play game button
+            colorDiv.style.display = 'block'; // show the color picker div
+        }
+
+        function changeColor() {
+            // this function changes the background color of the page to the selected color
+            const selectedColor = colorInput.value;
+            body.style.backgroundColor = selectedColor;
+            hiddenText.style.display = 'block'; // show the hidden text
+            resetButton.style.display = 'block'; // show the reset button
+            colorInput.style.display = 'none'; // hide the color input
+        }
+
+        function resetColor() {
+            // this function resets the background color to default and hides unnecessary elements
+            body.style.backgroundColor = 'white'; // reset to default
+            hiddenText.style.display = 'none'; // hide the hidden text
+            resetButton.style.display = 'none'; // hide the reset button
+            colorDiv.style.display = 'none'; // hide the color picker div
+            colorInput.style.display = 'block'; // show the color input
+            colorInput.value = '#0084ff'; // reset color input to default value
+            playGameButton.style.display = 'block'; // show the play game button again
+        }
+
+        // 3. is to assign the functions to the buttons by adding them function call to the actual elements (done above in the html code)
+    </script>
+</body>
+
+</html>
